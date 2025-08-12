@@ -1,0 +1,22 @@
+// Code your design here
+module addition(a,b,y);
+  input [7:0]a,b;
+  output [15:0]y;
+  assign y=a%b;
+endmodule
+// Code your testbench here
+// or browse Examples
+module tb;
+  logic [7:0]a,b;
+  logic [8:0]y;
+  addition u1(.a(a),.b(b),.y(y));
+  initial
+    begin
+      $monitor("a=%0d b=%0d y=%0d",a,b,y);
+      a='d17;b='d17;#1;
+      a='d17;b='d15;#1;
+    end
+endmodule
+//output
+a=17 b=17 y=0
+a=17 b=15 y=2
