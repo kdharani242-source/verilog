@@ -1,0 +1,66 @@
+// Code your design here
+1)module addition(a,b,y);
+  input a,b;
+  output [1:0]y;
+  assign y=a+b;
+endmodule
+// Code your testbench here
+// or browse Examples
+module tb;
+  logic a,b;
+  logic [1:0]y;
+  addition u1(.a(a),.b(b),.y(y));
+  initial
+    begin
+      $monitor("a=%0b b=%0b y=%0b",a,b,y);
+      a='b1;b='b1;
+    end
+endmodule
+//output
+a=1 b=1 y=10
+2)
+// Code your design here
+module addition(a,b,y);
+  input [2:0]a,b;
+  output [3:0]y;
+  assign y=a+b;
+endmodule
+// Code your testbench here
+// or browse Examples
+module tb;
+  logic [2:0]a,b;
+  logic [3:0]y;
+  addition u1(.a(a),.b(b),.y(y));
+  initial
+    begin
+      $monitor("a=%0d b=%0d y=%0d",a,b,y);
+      a='d7;b='d7;#1;
+      a='d6;b='d5;#1;
+    end
+endmodule
+//output
+a=7 b=7 y=14
+a=6 b=5 y=11
+3)
+// Code your design here
+module addition(a,b,y);
+  input [7:0]a,b;
+  output [8:0]y;
+  assign y=a+b;
+endmodule
+// Code your testbench here
+// or browse Examples
+module tb;
+  logic [7:0]a,b;
+  logic [8:0]y;
+  addition u1(.a(a),.b(b),.y(y));
+  initial
+    begin
+      $monitor("a=%0d b=%0d y=%0h",a,b,y);
+      a='d17;b='d17;#1;
+      a='d16;b='d15;#1;
+    end
+endmodule
+//output
+a=17 b=17 y=22
+a=16 b=15 y=1f
