@@ -1,0 +1,20 @@
+module add(a,b,c);
+  input a,b;
+  output c;
+  assign c=a&b;
+endmodule
+
+//tb
+module tb;
+  reg a,b;
+  wire c;
+  add u1(.a(a),.b(b),.c(c));
+  initial
+    begin 
+      $monitor("a=%0b b=%0b c=%0d",a,b,c);
+      for(int i=0; i<=3; i++) begin
+        {a,b}=i;#1;
+      end
+      
+    end
+endmodule
