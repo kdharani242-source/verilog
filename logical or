@@ -1,0 +1,24 @@
+Logical or: in this we can give inputs as multiple bits but the answer is only 0 or 1 
+module add(a,b,c);
+  input [3:0] a,b;
+  output [3:0] c;
+  assign c=a||b;
+endmodule
+//tb
+//`timescale 1ns/1ps
+module tb_add;
+  reg  [3:0] a, b;   // testbench inputs
+  wire [3:0] c;      // DUT output
+
+  // Instantiate DUT
+  add uut(.a(a), .b(b), .c(c));
+
+  initial begin
+    a='b1110;b='b0000;#10;
+    $display("a=%0d b=%0d c=%0d",a,b,c);
+    a='b1011;b='b1111;#10;
+    $display("a=%0d b=%0d c=%0d",a,b,c);
+    $finish; // end simulation
+  end
+endmodule
+
