@@ -1,0 +1,19 @@
+module replication(a,b);
+  input [3:0]a;
+  output [15:0] b;
+  assign b={4{a}};
+endmodule
+
+//tb
+// or browse Examples
+module tb;
+  reg [3:0] a;
+  wire [15:0] b;
+  replication u1(.a(a),.b(b));
+  initial
+    begin
+      $monitor("a=%0b b=%0b",a,b);
+      a='b1010;#1;
+      a='b1111;#1;
+    end
+endmodule
