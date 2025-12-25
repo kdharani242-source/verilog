@@ -1,0 +1,18 @@
+module conditional(a,b,c);
+  input [2:0] a,b;
+  output  c;
+  assign c=(a==b)?1:0;
+endmodule
+
+//tb
+module tb;
+  reg [2:0] a,b;
+  wire  c;
+  conditional u1(.a(a),.b(b),.c(c));
+  initial
+    begin
+      $monitor("a=%0b b=%0b c=%0b",a,b,c);
+      a='b101;b=110;#1;
+      a='b111;b='b111;#1;
+    end
+endmodule
