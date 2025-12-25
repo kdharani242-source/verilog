@@ -1,0 +1,20 @@
+module halfadder(a,b,sum,carry);
+  input a,b;
+  output sum,carry;
+  assign sum=a^b;
+  assign carry=a&b;
+endmodule
+
+//tb
+module tb;
+  reg a,b;
+  wire sum,carry;
+  halfadder u1(.a(a),.b(b),.sum(sum),.carry(carry));
+  initial
+    begin
+      $monitor("a=%0b b=%0b sum=%0b carry%0b",a,b,sum,carry);
+      for(int i=0;i<4;i++) begin
+        {a,b}=i;#1;
+      end
+    end
+endmodule
