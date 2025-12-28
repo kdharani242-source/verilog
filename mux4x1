@@ -1,0 +1,35 @@
+// Code your testbench here
+// or browse Examples
+module mux4x1(
+  input [3:0] d,
+  input [1:0] sel,
+  output reg y);
+  always@(*) begin
+    case(sel)
+      2'b00: y=d[0];
+      2'b01: y=d[1];
+      2'b10: y=d[2];
+      2'b11: y=d[3];
+      default: y='b0;
+    endcase
+  end
+endmodule
+
+// Code your testbench here
+// or browse Examples
+module tb;
+  reg [7:0] d;
+  reg  [2:0] sel;
+  wire y;
+  mux8x1 u1(.d(d),.sel(sel),.y(y));
+  initial
+    begin
+      //integer i;
+      $monitor("sel=%0b y=%0b",sel,y);
+      d='b10111111;
+      for(int i=0;i<8;i+=1) begin
+        sel=i;#1;
+      end
+      $finish;
+    end
+endmodule
