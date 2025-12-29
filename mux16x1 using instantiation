@@ -1,0 +1,67 @@
+module mux2x1(d,s,y);
+  input [1:0] d;
+  input  s;
+  output y;
+  assign y=d[s];
+endmodule
+module mux4x1(d,s,y);
+  input [3:0] d;
+  input [1:0] s;
+  output y;
+  wire y0,y1;
+  mux2x1 m1(.d(d[1:0]),.s(s[0]),.y(y0));
+  mux2x1 m2(.d(d[3:2]),.s(s[0]),.y(y1));
+  mux2x1 m3(.d({y0,y1}),.s(s[1]),.y(y));
+endmodule
+module mux16x1(d,s,y);
+  input [15:0] d;
+  input [3:0] s;
+  output y;
+  wire w1,w2,w3,w4;
+  mux4x1 m4(.d(d[3:0]),.s(s[1:0]),.y(w1));
+  mux4x1 m4(.d(d[7:4]),.s(s[1:0]),.y(w2));
+  mux4x1 m4(.d(d[11:8]),.s(s[1:0]),.y(w3));
+  mux4x1 m4(.d(d[15:12]),.s(s[1:0]),.y(w4));
+  mux4x1 m4(.d({w1,w2,w3,w4}),.s(s[1:0]),.y(y));
+endmodule
+// Code your testbench here
+// or browse Examples
+// Code your testbench here
+// or browse Examples
+// Code your testbench here
+// or browse Examples
+// Code your testbench here
+// or browse Examples
+module tb;
+  reg [15:0] d;
+  reg  [3:0]s;
+  wire y;
+  mux16x1 u1(.d(d),.s(s),.y(y));
+  initial
+    begin
+      d='b1010101010101010;
+      $monitor("s=%0b y=%0b",s,y);
+      for(int i=0;i<16;i=i+1) begin
+        s=i;#1;
+      end
+    end
+endmodule
+
+//output
+# KERNEL: s=0 y=0
+# KERNEL: s=1 y=1
+# KERNEL: s=10 y=0
+# KERNEL: s=11 y=1
+# KERNEL: s=100 y=0
+# KERNEL: s=101 y=1
+# KERNEL: s=110 y=0
+# KERNEL: s=111 y=1
+# KERNEL: s=1000 y=0
+# KERNEL: s=1001 y=1
+# KERNEL: s=1010 y=0
+# KERNEL: s=1011 y=1
+# KERNEL: s=1100 y=0
+# KERNEL: s=1101 y=1
+# KERNEL: s=1110 y=0
+# KERNEL: s=1111 y=1
+  
