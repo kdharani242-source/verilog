@@ -1,0 +1,26 @@
+// Code your design here
+//gate level
+module mux16x1(d,s,y);
+  input [15:0] d;
+  input [3:0] s;
+  output y;
+  assign y=d[s];
+endmodule
+    
+
+// Code your testbench here
+// or browse Examples
+module tb;
+  reg [15:0] d;
+  reg [3:0] s;
+  wire y;
+  mux16x1 u1(.d(d),.s(s),.y(y));
+  initial
+    begin
+      d='b1010101010101010;
+      $monitor("s=%0b y=%0b",s,y);
+      for(int i=0;i<16;i=i+1) begin
+        s=i;#1;
+      end
+    end
+endmodule
