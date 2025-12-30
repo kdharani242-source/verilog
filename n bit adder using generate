@@ -23,7 +23,7 @@ endmodule
 module tb;
   parameter n=8;
   reg [(n-1):0] a,b;
-  reg cin;
+  reg cin=0;
   wire [(n-1):0] s;
   wire c;
   nbit_adder u1(.a(a),.b(b),.cin(cin),.s(s),.c(c));
