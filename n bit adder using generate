@@ -1,0 +1,36 @@
+// Code your design here
+module nbit_adder(a,b,cin,s,c);
+  parameter n=8;
+  input [(n-1):0] a,b;
+  input cin;
+  output [(n-1):0] s;
+  output c;
+  wire [n:0] ca;
+    assign ca[0] = cin;
+  genvar i;
+  generate
+    for (i=0;i<n;i=i+1)
+      begin:or_loop
+        assign s[i]=a[i]^b[i]^ca[i];
+        assign ca[i+1]=(a[i]&b[i])|(b[i]&ca[i])|(ca[i]&a[i]);
+      end
+     endgenerate
+  assign c=ca[n];
+endmodule
+
+// Code your testbench here
+// or browse Examples
+module tb;
+  parameter n=8;
+  reg [(n-1):0] a,b;
+  reg cin;
+  wire [(n-1):0] s;
+  wire c;
+  nbit_adder u1(.a(a),.b(b),.cin(cin),.s(s),.c(c));
+  initial
+    begin
+      $monitor("a=%0b b=%0b s=%0b c=%0b",a,b,);
+      a='b10101010;b='b00000000;#1;
+      a='b11111111;b='b00000000;#1;
+    end
+endmodule
