@@ -1,0 +1,32 @@
+/ Code your design here
+module andgate(a,b,y);
+  parameter n=8;
+  input [(n-1):0] a,b;
+  output [(n-1):0] y;
+  genvar i;
+  generate
+    for(i=0;i<n;i++)
+      begin: and_loop
+        and ag(y[i],a[i],b[i]);
+      end
+  endgenerate
+endmodule
+// Code your testbench here
+// or browse Examples
+module tb;
+  parameter n=8;
+  reg [(n-1):0]a,b;
+  wire [(n-1):0] y;
+  andgate u1(a,b,y);
+  initial
+    begin
+      $monitor("a=%0b b=%0b y=%0b",a,b,y);
+      a='b11111111;b='b00000000;#1;
+      a='b10101010;b='b11111111;
+    end
+endmodule
+
+
+//output
+a=11111111 b=0 y=0
+a=10101010 b=11111111 y=10101010
