@@ -1,0 +1,37 @@
+// Code your design here
+module demux1x4(d,s,y);
+  input d;
+  input [1:0]s;
+  output reg [3:0] y;
+  always@(*) begin
+    y='b0000;
+    case(s)
+      2'b00: y[0]=d;
+      2'b01: y[1]=d;
+      2'b10: y[2]=d;
+      2'b11: y[3]=d;  
+    endcase
+  end
+endmodule        
+// Code your testbench here
+// or browse Examples
+module tb;
+  reg d;
+  reg [1:0]s;
+  wire [3:0] y;
+  demux1x4 u1(d,s,y);
+  initial
+    begin
+      d='b1;
+      $monitor("d=%b s=%b y=%b",d,s,y);
+      for(int i=0;i<4;i++) begin
+        s=i;#1;
+      end
+    end
+endmodule
+
+//output
+# KERNEL: d=1 s=00 y=0001
+# KERNEL: d=1 s=01 y=0010
+# KERNEL: d=1 s=10 y=0100
+# KERNEL: d=1 s=11 y=1000
