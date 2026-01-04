@@ -1,0 +1,40 @@
+// Code your design here
+module demux1x16(d,s,y);
+  input d;
+  input [3:0]s;
+  output reg [15:0] y;
+  assign y=d<<s;
+endmodule        
+// Code your testbench here
+// or browse Examples
+module tb;
+  reg d;
+  reg [3:0]s;
+  wire [15:0] y;
+  demux1x16 u1(d,s,y);
+  initial
+    begin
+      d='b1;
+      $monitor("d=%b s=%b y=%b",d,s,y);
+      for(int i=0;i<16;i++) begin
+        s=i;#1;
+      end
+    end
+endmodule
+//output
+# KERNEL: d=1 s=0000 y=0000000000000001
+# KERNEL: d=1 s=0001 y=0000000000000010
+# KERNEL: d=1 s=0010 y=0000000000000100
+# KERNEL: d=1 s=0011 y=0000000000001000
+# KERNEL: d=1 s=0100 y=0000000000010000
+# KERNEL: d=1 s=0101 y=0000000000100000
+# KERNEL: d=1 s=0110 y=0000000001000000
+# KERNEL: d=1 s=0111 y=0000000010000000
+# KERNEL: d=1 s=1000 y=0000000100000000
+# KERNEL: d=1 s=1001 y=0000001000000000
+# KERNEL: d=1 s=1010 y=0000010000000000
+# KERNEL: d=1 s=1011 y=0000100000000000
+# KERNEL: d=1 s=1100 y=0001000000000000
+# KERNEL: d=1 s=1101 y=0010000000000000
+# KERNEL: d=1 s=1110 y=0100000000000000
+# KERNEL: d=1 s=1111 y=1000000000000000
