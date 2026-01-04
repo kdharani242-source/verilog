@@ -1,0 +1,24 @@
+module demux1x2(d,s,y);
+  input d;
+  input s;
+  output [1:0] y;
+  assign y[0]=d&~s;
+  assign y[1]=d&s;
+endmodule        
+
+
+
+module tb;
+  reg d;
+  reg s;
+  wire [1:0] y;
+  demux1x2 u1(d,s,y);
+  initial
+    begin
+      d='b1;
+      $monitor("d=%b s=%b y=%b",d,s,y);
+      for(int i=0;i<2;i++) begin
+        s=i;#1;
+      end
+    end
+endmodule
