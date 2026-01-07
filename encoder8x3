@@ -1,0 +1,32 @@
+// Code your design here
+module encoder8x3(i,y);
+  input [7:0] i;
+  output [2:0] y;
+  assign y[0]=i[1]+i[3]+i[5]+i[7];
+  assign y[1]=i[2]+i[3]+i[6]+i[7];
+  assign y[2]=i[4]+i[5]+i[6]+i[7];
+endmodule
+// Code your testbench here
+// or browse Examples
+module tb;
+  reg [7:0] i;
+  wire [2:0] y;
+  encoder8x3 u1(i,y);
+  initial
+    begin
+      $monitor("i=%b y=%b",i,y);
+      for( int j=0;j<8;j++) begin
+        i=1<<j;#1;
+      end
+    end
+endmodule
+
+//output
+# KERNEL: i=00000001 y=000
+# KERNEL: i=00000010 y=001
+# KERNEL: i=00000100 y=010
+# KERNEL: i=00001000 y=011
+# KERNEL: i=00010000 y=100
+# KERNEL: i=00100000 y=101
+# KERNEL: i=01000000 y=110
+# KERNEL: i=10000000 y=111
