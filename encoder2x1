@@ -1,0 +1,24 @@
+module encoder2x1(i,y);
+  input [1:0] i;
+  output y;
+  assign y=i[0]+i[1];
+endmodule
+
+// Code your testbench here
+// or browse Examples
+module tb;
+  reg [1:0] i;
+  wire y;
+  encoder2x1 u1(i,y);
+  initial
+    begin
+      $monitor("i=%b y=%b",i,y);
+      for( int j=0;j<2;j++) begin
+        i=01<<j;#1;
+      end
+    end
+endmodule
+
+//output
+# KERNEL: i=01 y=1
+# KERNEL: i=10 y=1
