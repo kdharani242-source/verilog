@@ -1,0 +1,26 @@
+// Code your design here
+module decoder1x2(d,y);
+  input d;
+  output reg [1:0]y;
+  always @ (*) begin
+    case(d)
+      1'b0: y='b01;
+      1'b1: y='b10;
+      default: y = 2'b00;
+    endcase
+    end
+endmodule
+
+//tb
+module tb;
+  reg d;
+  wire [1:0] y;
+  decoder1x2 u1(d,y);
+  initial
+    begin
+      $monitor("d=%b y=%b",d,y);
+      for(int i=0;i<2;i++) begin
+        d=i;#1;
+      end
+    end
+endmodule
