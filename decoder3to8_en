@@ -1,0 +1,41 @@
+module decoder3to8_en (
+  input  [2:0] d,
+    input        en,
+    output [7:0] y
+);
+  assign y = en ? (8'b00000001 << d) : 8'b00000000;
+endmodule
+// Code your testbench here
+// or browse Examples
+module tb;
+  reg [2:0]d;
+  reg en;
+  wire [7:0] y;
+  decoder3to8_en u1(d,en,y);
+  initial
+    begin
+      en=1;
+      $monitor("d=%b y=%b",d,y);
+      for(int i=0;i<16;i++) begin
+        d=i;#1;
+      end
+    end
+endmodule
+
+//output
+# KERNEL: d=000 y=00000001
+# KERNEL: d=001 y=00000010
+# KERNEL: d=010 y=00000100
+# KERNEL: d=011 y=00001000
+# KERNEL: d=100 y=00010000
+# KERNEL: d=101 y=00100000
+# KERNEL: d=110 y=01000000
+# KERNEL: d=111 y=10000000
+# KERNEL: d=000 y=00000001
+# KERNEL: d=001 y=00000010
+# KERNEL: d=010 y=00000100
+# KERNEL: d=011 y=00001000
+# KERNEL: d=100 y=00010000
+# KERNEL: d=101 y=00100000
+# KERNEL: d=110 y=01000000
+# KERNEL: d=111 y=10000000
