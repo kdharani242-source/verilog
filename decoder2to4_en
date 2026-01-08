@@ -1,0 +1,34 @@
+module decoder2to4_en (
+  input  [1:0] d,
+    input        en,
+  output [3:0] y
+);
+  assign y = en ? (4'b0001 << d) : 4'b0000;
+endmodule
+
+// Code your testbench here
+// or browse Examples
+module tb;
+  reg [1:0]d;
+  reg en;
+  wire [3:0] y;
+  decoder2to4_en u1(d,en,y);
+  initial
+    begin
+      en=1;
+      $monitor("d=%b y=%b",d,y);
+      for(int i=0;i<8;i++) begin
+        d=i;#1;
+      end
+    end
+endmodule
+
+//output
+# KERNEL: d=00 y=0001
+# KERNEL: d=01 y=0010
+# KERNEL: d=10 y=0100
+# KERNEL: d=11 y=1000
+# KERNEL: d=00 y=0001
+# KERNEL: d=01 y=0010
+# KERNEL: d=10 y=0100
+# KERNEL: d=11 y=1000
