@@ -1,0 +1,28 @@
+// Code your design here
+module halfsub(a,b,d,borrow);
+  input a,b;
+  output d, borrow;
+  assign d=a^b;
+  assign borrow=(~a)&b;
+endmodule
+
+// Code your testbench here
+// or browse Examples
+module tb;
+  reg a,b;
+  wire d,borrow;
+  halfsub u1(a,b,d,borrow);
+  initial
+    begin
+      $monitor("a=%0b b=%0b d=%0b borrow=%0b",a,b,d,borrow);
+      for(int i=0; i<3;i++) begin
+        {a,b}=i;#1;
+      end
+    end
+endmodule
+
+//output
+# KERNEL: a=0 b=0 diff=0 borrow=0
+# KERNEL: a=0 b=1 diff=1 borrow=1
+# KERNEL: a=1 b=0 diff=1 borrow=0
+# KERNEL: a=1 b=1 diff=0 borrow=0
