@@ -1,0 +1,46 @@
+
+module priority_encoder_4to2 (
+    input  [3:0] d,
+    output [1:0] y,
+    output       valid
+);
+
+  assign valid = |d;//reduction or operator (valid=1 if atleast one 1 present in data)
+assign y = d[3] ? 2'b11 :
+           d[2] ? 2'b10 :
+           d[1] ? 2'b01 :
+                  2'b00;
+
+Endmodule
+// Code your testbench here
+// or browse Examples
+module tb;
+  reg [3:0] d;
+  wire [1:0]y;
+  wire valid;
+  priority_encoder_4to2 u1(d,y,valid);
+  initial
+    begin
+      $monitor("d=%b valid=%b y=%b",d,valid,y);
+      for(int i=0;i<16;i++) begin
+        d=i;#1;
+      end
+    end
+endmodule
+//output
+# KERNEL: d=0000 valid=0 y=00
+# KERNEL: d=0001 valid=1 y=00
+# KERNEL: d=0010 valid=1 y=01
+# KERNEL: d=0011 valid=1 y=01
+# KERNEL: d=0100 valid=1 y=10
+# KERNEL: d=0101 valid=1 y=10
+# KERNEL: d=0110 valid=1 y=10
+# KERNEL: d=0111 valid=1 y=10
+# KERNEL: d=1000 valid=1 y=11
+# KERNEL: d=1001 valid=1 y=11
+# KERNEL: d=1010 valid=1 y=11
+# KERNEL: d=1011 valid=1 y=11
+# KERNEL: d=1100 valid=1 y=11
+# KERNEL: d=1101 valid=1 y=11
+# KERNEL: d=1110 valid=1 y=11
+# KERNEL: d=1111 valid=1 y=11
