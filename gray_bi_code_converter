@@ -1,0 +1,40 @@
+// Code your design here
+module gray_bi_code_converter(g,b);
+  input [3:0] g;
+  output [3:0] b;
+   assign b[3] = g[3];          // MSB copied directly
+    assign b[2] = b[3] ^ g[2];
+    assign b[1] = b[2] ^ g[1];
+    assign b[0] = b[1] ^ g[0];
+endmodule
+// Code your testbench here
+// or browse Examples
+module tb;
+  reg [3:0] g;
+  wire [3:0] b;
+  gray_bi_code_converter u1(g,b);
+  initial
+    begin
+      $monitor("g=%b b=%b",g,b);
+      for(int i=0;i<16; i++) begin
+        g=i;#1;
+      end
+    end
+endmodule
+//output
+# KERNEL: g=0000 b=0000
+# KERNEL: g=0001 b=0001
+# KERNEL: g=0010 b=0011
+# KERNEL: g=0011 b=0010
+# KERNEL: g=0100 b=0111
+# KERNEL: g=0101 b=0110
+# KERNEL: g=0110 b=0100
+# KERNEL: g=0111 b=0101
+# KERNEL: g=1000 b=1111
+# KERNEL: g=1001 b=1110
+# KERNEL: g=1010 b=1100
+# KERNEL: g=1011 b=1101
+# KERNEL: g=1100 b=1000
+# KERNEL: g=1101 b=1001
+# KERNEL: g=1110 b=1011
+# KERNEL: g=1111 b=1010
