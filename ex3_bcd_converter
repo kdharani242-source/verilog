@@ -1,0 +1,31 @@
+// Code your design here
+module ex3_bcd_converter(ex3,bcd);
+ input [3:0] ex3; 
+  output [3:0] bcd;
+   assign bcd=ex3-'b0011;
+endmodule
+// Code your testbench here
+// or browse Examples
+module tb;
+  reg [3:0] ex3;  
+  wire [3:0] bcd;
+  ex3_bcd_converter u1(ex3,bcd);
+  initial
+    begin
+      $monitor(" ex3=%b bcd=%b",ex3,bcd);
+      for(int i=3;i<13;i++) begin
+        ex3=i;#1;
+      end
+    end
+endmodule
+//output
+# KERNEL:  ex3=0011 bcd=0000
+# KERNEL:  ex3=0100 bcd=0001
+# KERNEL:  ex3=0101 bcd=0010
+# KERNEL:  ex3=0110 bcd=0011
+# KERNEL:  ex3=0111 bcd=0100
+# KERNEL:  ex3=1000 bcd=0101
+# KERNEL:  ex3=1001 bcd=0110
+# KERNEL:  ex3=1010 bcd=0111
+# KERNEL:  ex3=1011 bcd=1000
+# KERNEL:  ex3=1100 bcd=1001
