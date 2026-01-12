@@ -1,0 +1,36 @@
+// Code your design here
+module bcd_bi_converter(bcd,b);
+  input [7:0] bcd;
+  output [6:0] b;
+  assign b=(bcd[7:4]*4'd10+bcd[3:0]);
+endmodule
+
+// Code your testbench here
+// or browse Examples
+module tb_bin_to_bcd;
+  reg [7:0] bcd;
+  wire [6:0] b;
+
+  // DUT instantiation
+  bcd_bi_converter dut (.bcd(bcd),.b(b));
+  initial begin
+    $monitor(" %b %b  %b",bcd[7:4],bcd[3:0],b);
+    bcd = 8'b0000_0000; #10; // 00
+    bcd = 8'b0000_0101; #10; // 05
+    bcd = 8'b0001_0010; #10; // 12
+    bcd = 8'b0010_0101; #10; // 25
+    bcd = 8'b0011_1001; #10; // 39
+    bcd = 8'b0101_0000; #10; // 50
+    bcd = 8'b0111_0101; #10; // 75
+    bcd = 8'b1001_1001; #10; // 99
+  end
+endmodule
+//output
+# KERNEL:  0000 0000  0000000
+# KERNEL:  0000 0101  0000101
+# KERNEL:  0001 0010  0001100
+# KERNEL:  0010 0101  0011001
+# KERNEL:  0011 1001  0100111
+# KERNEL:  0101 0000  0110010
+# KERNEL:  0111 0101  1001011
+# KERNEL:  1001 1001  1100011
