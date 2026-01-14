@@ -1,0 +1,36 @@
+module srlatch(s,r,q);
+  input s,r;
+  output reg q;
+  always@(*) begin
+    case({s,r})
+      2'b00:q=q;
+      2'b01:q='b0;
+      2'b10:q='b1;
+      2'b11:q=1'bx;
+    endcase
+  end
+endmodule
+// Code your testbench here
+// or browse Examples
+module tb;
+  reg s,r;
+  wire q;
+  srlatch u1(s,r,q);
+  initial
+    begin
+      $monitor("s=%b r=%b q=%b",s,r,q);
+      for(int i=0;i<4;i++) begin
+        {s,r}=i;#1;
+      end
+      s=0;r=0;#1;
+      s=1;r=0;
+    end
+endmodule
+
+//output
+# KERNEL: s=0 r=0 q=x
+# KERNEL: s=0 r=1 q=0
+# KERNEL: s=1 r=0 q=1
+# KERNEL: s=1 r=1 q=x
+# KERNEL: s=0 r=0 q=x
+# KERNEL: s=1 r=0 q=1
