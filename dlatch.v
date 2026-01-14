@@ -8,7 +8,7 @@ endmodule
 // Code your testbench here
 // or browse Examples
 module tb;
-  reg en,q;
+  reg en,d;
   wire q;
   dlatch u1(en,d,q);
   initial
@@ -17,6 +17,8 @@ module tb;
       for(int i=0;i<4;i++) begin
         {en,d}=i;#1;
       end
+      en=0;d=0;#1;
+      en=1;d=1;
     end
 endmodule
 //output
@@ -25,4 +27,4 @@ endmodule
 # KERNEL: en=1 d=0 q=0
 # KERNEL: en=1 d=1 q=1
 # KERNEL: en=0 d=0 q=1
-# KERNEL: en=1 d=0 q=0
+# KERNEL: en=1 d=1 q=1
