@@ -1,0 +1,37 @@
+//c
+#include <stdio.h>
+
+int main() {
+	// your code goes here
+	int t;
+	scanf("%d",&t);
+	while(t--){
+	    int n;
+	    scanf("%d",&n);
+	    int a,b,c,d;
+	    scanf("%d %d %d %d",&a,&b,&c,&d);
+	    if(a>=b && a>=c && a>=d){
+	        printf("%d\n",a);
+	    }
+	    else if(b>=a && b>=c && b>=d){
+	        printf("%d\n",b);
+	    }
+	    else if(c>=b && c>=a && c>=d){
+	        printf("%d\n",c);
+	    }
+	    else{
+	        printf("%d\n",d);
+	    }
+	}
+
+}
+
+//python
+# cook your dish here
+def solve():
+    n=int(input())
+    a,b,c,d=map(int,input().split())
+    print(max(a,b,c,d))
+t=int(input())
+for i in range(t):
+    solve()
